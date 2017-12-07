@@ -65,31 +65,28 @@
     }
     .mui-icon-home{
         background-image: url("../../images/news.png");
-        /*设置环绕*/
-        background-repeat: round;
     }
     .mui-icon-email{
         background-image: url("../../images/picShare.png");
-        /*设置环绕*/
-        background-repeat: round;
     }
     .mui-icon-chatbubble{
         background-image: url("../../images/goodShow.png");
-        /*设置环绕*/
-        background-repeat: round;
     }
     .mui-icon-location{
         background-image: url("../../images/feedback.png");
-        /*设置环绕*/
-        background-repeat: round;
     }
     .mui-icon-search{
         background-image: url("../../images/search.png");
-        /*设置环绕*/
-        background-repeat: round;
     }
     .mui-icon-phone{
         background-image: url("../../images/callme.png");
+    }
+    .mui-icon-home,
+    .mui-icon-email,
+    .mui-icon-chatbubble,
+    .mui-icon-location,
+    .mui-icon-search,
+    .mui-icon-phone{
         /*设置环绕*/
         background-repeat: round;
     }
@@ -133,9 +130,9 @@
                         console.log(response)
                         this.msg = response.body.message
                     },
-                    response => {
+                    err => {
                         // 失败的回调方法
-                        console.log(response)
+                        console.log(err)
                     }
                 )
             }

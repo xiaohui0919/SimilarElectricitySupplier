@@ -21,11 +21,20 @@ Vue.use(VueRouer)
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
+import moment from 'moment'
+// 定义一个全局的过滤器（过滤时间）
+Vue.filter('filter',function (input,fmtString) {
+    return moment(input).format(fmtString)
+})
+
 // 引入自定义组件
 import Home from './components/Home/Home.vue'
 import Member from './components/Member.vue'
 import Shopcar from './components/Shopcar.vue'
 import Search from './components/Search.vue'
+import NewsList from './components/Home/NewsList.vue'
+import NewsInfo from './components/Home/NewsInfo.vue'
+import PhotoList from './components/Home/photoList.vue'
 
 
 // 路由的实例化
@@ -36,8 +45,10 @@ var router = new VueRouer({
         {name:'home',path:'/home',component:Home},
         {name:'member',path:'/member',component:Member},
         {name:'shopcar',path:'/shopcar',component:Shopcar},
-        {name:'search',path:'/search',component:Search}
-
+        {name:'search',path:'/search',component:Search},
+        {name:'newslist',path:'/newslist',component:NewsList},
+        {name:'newsinfo',path:'/newsinfo/:id',component:NewsInfo},
+        {name:'photolist',path:'/photolist',component:PhotoList}
     ]
 })
 

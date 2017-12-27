@@ -2,7 +2,7 @@
     <div class="temp">
         <ul class="mui-table-view">
             <li class="mui-table-view-cell mui-media" v-for="(item,index) in newsListData" :key="index">
-                <router-link v-bind='{to:"/newsinfo/"+item.id}'>
+                <router-link v-bind='{to: "/newsinfo/"+item.id}'>
                     <img class="mui-media-object mui-pull-left" :src="item.screenshot">
                     <div class="mui-media-body">
                         {{ item.title }}

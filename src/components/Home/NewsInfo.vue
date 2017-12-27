@@ -4,8 +4,10 @@
             {{ newsInfoData.Title }}
         </h4>
         <div class="otitle">
+            <div>
             日期:{{ newsInfoData.OperateInfo.OperateTime | filter('YYYY-MM-DD') }}
             浏览数:{{ newsInfoData.Status }}
+            </div>
             分类:{{ newsInfoData.SceneName }}
         </div>
         <div v-html="newsInfoData.Content" class="content"></div>
@@ -13,9 +15,18 @@
 </template>
 
 <style>
+    .title {
+        text-align: center;
+    }
     .otitle{
         color: #bab3b3;
         font-size: 12px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .content {
+        padding: 5px;
+        margin-bottom: 50px;
     }
     .content img{
         width: 100% !important;

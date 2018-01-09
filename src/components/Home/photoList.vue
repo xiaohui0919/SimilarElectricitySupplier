@@ -13,10 +13,12 @@
         <div class="images">
             <ul>
                 <li v-for="item in imagesData">
-                    <img :src="item.img" alt="">
-                    <div>
-                        <p>{{ item.content }}</p>
-                    </div>
+                    <router-link v-bind='{to:"/photoinfo/"+item.id}'>
+                        <img :src="item.img" alt="">
+                        <div class="zhaiyao">
+                            <p>{{ item.content }}</p>
+                        </div>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -41,8 +43,20 @@
         overflow-y: hidden;
         white-space: nowrap;
     }
+    .images li{
+        position: relative;
+    }
     .images img{
         width: 100%;
+    }
+    .zhaiyao{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(1,1,1,.1);
+    }
+    .zhaiyao p{
+        color: #fff;
     }
 </style>
 

@@ -27,6 +27,10 @@ Vue.filter('filter',function (input,fmtString) {
     return moment(input).format(fmtString)
 })
 
+// 引入图片位置预览功能的框架
+import vuePicturePreview from 'vue-picture-preview'
+Vue.use(vuePicturePreview)
+
 // 引入自定义组件
 import Home from './components/Home/Home.vue'
 import Member from './components/Member.vue'
@@ -35,6 +39,7 @@ import Search from './components/Search.vue'
 import NewsList from './components/Home/NewsList.vue'
 import NewsInfo from './components/Home/NewsInfo.vue'
 import PhotoList from './components/Home/photoList.vue'
+import PhotoInfo from './components/Home/PhotoInfo.vue'
 
 
 // 路由的实例化
@@ -48,7 +53,8 @@ var router = new VueRouer({
         {name:'search',path:'/search',component:Search},
         {name:'newslist',path:'/newslist',component:NewsList},
         {name:'newsinfo',path:'/newsinfo/:id',component:NewsInfo},
-        {name:'photolist',path:'/photolist',component:PhotoList}
+        {name:'photolist',path:'/photolist',component:PhotoList},
+        {name:'photoinfo',path:'/photoinfo/:id',component:PhotoInfo},
     ]
 })
 

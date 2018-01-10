@@ -11,6 +11,9 @@
             分类:{{ newsInfoData.SceneName }}
         </div>
         <div v-html="newsInfoData.Content" class="content"></div>
+
+        <!--添加一个评论组件-->
+        <Discuss :discussID="sendID"></Discuss>
     </div>
 </template>
 
@@ -34,6 +37,8 @@
 </style>
 
 <script type="text/ecmascript-6">
+    import common from '../../tool/Common'
+    import Discuss from '../sub/Discuss.vue'
     export default {
         data(){
             return {
@@ -55,12 +60,17 @@
                     "OperateInfo": [
                         {"OperateTime": "2017-11-17 17:23:06"}
                     ]
-                }
+                },
+                sendID:0
             }
+        },
+        components:{
+            Discuss
         },
         props:['id'],
         created(){
 //            this.getNewsInfoData()
+            this.sendID=this.$route.params.id
         },
         methods:{
             getNewsInfoData(){

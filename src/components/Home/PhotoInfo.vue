@@ -28,7 +28,7 @@
     </div>
 </template>
 
-<style>
+<style scoped=>
     .temp{
         margin-bottom: 50px;
     }

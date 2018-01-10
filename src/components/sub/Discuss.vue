@@ -54,6 +54,7 @@
 </style>
 
 <script type="text/ecmascript-6">
+    import common from '../../tool/Common'
     export default {
         data(){
             return {

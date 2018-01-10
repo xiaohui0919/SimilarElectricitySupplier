@@ -1,5 +1,5 @@
 <template>
-    <div class="temp">
+    <div>
         <!--图片轮播部分代码，从mint-ui组建中获取-->
         <mt-swipe :auto="4000">
             <mt-swipe-item class="slide2" v-for="(item,index) in lunboData" :key="index">

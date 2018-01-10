@@ -1,7 +1,12 @@
 <template>
     <div>
         <!--导航条-->
-        <mt-header fixed title="Vue项目"></mt-header>
+        <!--<mt-header fixed title="Vue项目"></mt-header>-->
+        <mt-header fixed title="Vue项目">
+            <router-link to="" slot="left">
+                <mt-button v-show="isshow" @click="goBack" icon="back">返回</mt-button>
+            </router-link>
+        </mt-header>
 
         <!--切换各个组件的位置-->
         <router-view></router-view>
@@ -34,6 +39,23 @@
 
 <script>
     export default {
-
+        data(){
+            return {
+                isshow:false
+            }
+        },
+        watch:{
+            '$route':function (newValue,oldValue) {
+                var path=newValue.path;
+                // 判断 是否是/home页面
+                path=='/home'?this.isshow=false:this.isshow=true
+            }
+        },
+        methods:{
+            // 返回上一页
+            goBack(){
+                this.$router.go(-1)
+            }
+        }
     }
 </script>

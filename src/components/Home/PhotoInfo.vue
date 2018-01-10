@@ -23,35 +23,7 @@
                 <p v-html="photoInfoData.Content"></p>
             </div>
             <!--评论部分-->
-            <div class="discuss">
-                <div class="submit">
-                    <div class="submittitle">
-                        <h4>提交评论</h4>
-                    </div>
-                    <div class="optitle">
-                        <textarea placeholder="请输入评论内容" red="textA"></textarea>
-                        <mt-button type="primary" size="large" @click="postDiscuss">提交评论</mt-button>
-                    </div>
-                </div>
-            </div>
-            <div class="show">
-                <div class="showtitle">
-                    <h4>展示评论内容</h4>
-                    <ul>
-                        <li v-for="item in discuss">
-                            <div class="showcontent">
-                                {{item.title}}
-                            </div>
-                            <div class="stitle">
-                                <div>
-                                {{item.name}}
-                                </div>
-                                {{item.time | filter('YYYY-MM-DD')}}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <Discuss :discussID="sendID"></Discuss>
         </div>
     </div>
 </template>
@@ -60,24 +32,7 @@
     .temp{
         margin-bottom: 50px;
     }
-    .show ul{
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .show li{
-        border-bottom: 1px solid rgba(1,1,1,.1);
-        padding: 5px;
-    }
-    .stitle{
-        font-size: 14px;
-        color: rgba(1,1,1,.4);
-        display: flex;
-        justify-content: space-between;
-    }
-    .submit{
-        padding: 5px;
-    }
+
     .img{
         width: 55px;
         height: 55px;
@@ -106,6 +61,8 @@
     import common from '../../tool/Common'
     // 提示
     import { Toast } from 'mint-ui'
+
+    import Discuss from '../sub/Discuss.vue'
     export default {
         data(){
           return {
@@ -136,74 +93,22 @@
                   {img:'http://img.hb.aicdn.com/380533e59fed767ee4f658e14eb0c1290812de501a769-Ro8nCh_sq320'},
                   {img:'http://img.hb.aicdn.com/380533e59fed767ee4f658e14eb0c1290812de501a769-Ro8nCh_sq320'}
               ],
-              discuss:[
-                  {
-                      name:'撒加上可减肥1',
-                      title:'啥分段函数房价多少',
-                      time:new Date()
-                  },
-                  {
-                      name:'撒加上可减肥2',
-                      title:'啥分段函数房价多少',
-                      time:new Date()
-                  },
-                  {
-                      name:'撒加上可减肥3',
-                      title:'啥分段函数房价多少',
-                      time:new Date()
-                  },
-                  {
-                      name:'撒加上可减肥4',
-                      title:'啥分段函数房价多少',
-                      time:new Date()
-                  }
-                  ]
+              sendID:0
           }
+        },
+        components:{
+            Discuss
         },
         props:['id'],
         created(){
             var id = this.$route.params.id
-//            this.getDiscussData(id)
+
 //            this.getInfoData(id)
 //            this.getImageData(id)
+            this.sendID=id
         },
         methods:{
-            // 发送评论数据
-            postDiscuss(){
-                var id = this.$route.params.id
-                var url=`${common.HTTP}${common.SAMPLE_BUFFERS}:${common.PORT}/${id}`;
-                var content=this.$refs.textA.value;
 
-                if(!content||content.trim().length<=0){
-                    Toast('提交评论不能为空');
-                    return false;
-                }
-
-                this.$http.post(url,{content:content},{emulateJSON:true}).then(
-                    res=>{
-                        Toast('评论提交成功');
-                        // 清空文本域的内容
-                        this.$refs.textA.value='';
-                        // 获取评论数据
-                        this.getDiscussData(id)
-                    },
-                    err=>{
-                        console.log(err);
-                    }
-                )
-            },
-            // 请求评论的数据
-            getDiscussData(id){
-                var url=`${common.HTTP}${common.SAMPLE_BUFFERS}:${common.PORT}/${id}:?pageindex=1`;
-                this.$http.get(url).then(
-                    res=>{
-                        this.discuss=res.body.message
-                    },
-                    err=>{
-                        console.log(err);
-                    }
-                )
-            },
             //请求info页面的文字部分
             getInfoData(id){
                 var url=`${common.HTTP}${common.SAMPLE_BUFFERS}:${common.PORT}/${id}`;

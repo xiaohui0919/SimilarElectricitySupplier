@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="temp">
         <div class="discuss">
             <div class="submit">
                 <div class="submittitle">

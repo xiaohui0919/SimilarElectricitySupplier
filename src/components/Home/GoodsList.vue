@@ -1,30 +1,38 @@
 <template>
-    <div>
+    <div class="temp">
         <div class="mui-content" style="background-color:#fff">
-            <h5 style="background-color:#efeff4">慢生活</h5>
             <ul class="mui-table-view mui-grid-view">
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="../../images/0-1.jpg">
-                        <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="../../images/0-2.jpg">
-                        <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div></a></li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#"><img class="mui-media-object" src="../../images/0-3.jpg">
-                        <div class="mui-media-body">Color of SIP CBD</div></a></li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="../../images/0-4.jpg">
-                        <div class="mui-media-body">静静看这世界</div></a></li>
+                <li v-for="item in goodsData" class="mui-table-view-cell mui-media mui-col-xs-6">
+                    <router-link v-bind='{to:"/goodsdetail/"+item.id}'>
+                        <img class="mui-media-object" :src="item.img">
+                        <div class="mui-media-body info">
+                            {{item.name}}
+                            <div class="price">
+                            折扣价:<span>¥{{item.z}}</span>
+                            销售价:<del>¥{{item.x}}</del>
+                            </div>
+                        </div>
+                    </router-link>
+                </li>
             </ul>
         </div>
     </div>
 </template>
 
 <style scoped>
-
+    .price{
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+    .info{
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+    }
+    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+        height: 40px;
+    }
 </style>
 
 <script type="text/ecmascript-6">
@@ -32,15 +40,96 @@
     export default {
         data(){
             return {
-
+                goodsData:[
+                    {
+                        img:'../../images/0-1.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:0,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-2.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:1,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-3.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:2,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-4.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:3,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-3.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:2,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-4.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:3,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-3.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:2,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-4.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:3,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-4.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:3,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-3.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:2,
+                        z:11111,
+                        x:22222
+                    },
+                    {
+                        img:'../../images/0-4.jpg',
+                        name:'幸福就是可以一起睡觉',
+                        id:3,
+                        z:11111,
+                        x:22222
+                    }
+                ]
             }
         },
+        created(){
+//            this.getGoodsListData(1)
+        },
         methods:{
-            getGoodsListData(){
-                var url=`${common.HTTP}${common.SAMPLE_BUFFERS}:${common.PORT}`;
+            getGoodsListData(number){
+                var url=`${common.HTTP}${common.SAMPLE_BUFFERS}:${common.PORT}?${number}`;
                 this.$http.get(url).then(
                     res=>{
-
+                        this.goodsData = res.body.message
                     },
                     err=>{
                         console.log(err);

@@ -41,6 +41,9 @@ import NewsInfo from './components/Home/NewsInfo.vue'
 import PhotoList from './components/Home/photoList.vue'
 import PhotoInfo from './components/Home/PhotoInfo.vue'
 import GoodsList from './components/Home/GoodsList.vue'
+import GoodsDetail from './components/Home/GoodsDetail.vue'
+import GoodsDesc from './components/Home/GoodsDesc.vue'
+import Comment from './components/Home/Comment.vue'
 
 
 // 路由的实例化
@@ -56,7 +59,10 @@ var router = new VueRouer({
         {name:'newsinfo',path:'/newsinfo/:id',component:NewsInfo},
         {name:'photolist',path:'/photolist',component:PhotoList},
         {name:'photoinfo',path:'/photoinfo/:id',component:PhotoInfo},
-        {name:'goodslist',path:'/goodslist/:id',component:GoodsList}
+        {name:'goodslist',path:'/goodslist',component:GoodsList},
+        {name:'goodsdetail',path:'/goodsdetail/:id',component:GoodsDetail},
+        {name:'goodsdesc',path:'/goodsdesc',component:GoodsDesc},
+        {name:'comment',path:'/comment',component:Comment}
     ]
 })
 

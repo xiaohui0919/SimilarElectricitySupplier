@@ -103,13 +103,16 @@
             return {
                 msg: [
                     {
-                        img: 'A'
+                        img: '../../images/0-1.jpg'
                     },
                     {
-                        img: 'B'
+                        img: '../../images/0-2.jpg'
                     },
                     {
-                        img: 'C'
+                        img: '../../images/0-3.jpg'
+                    },
+                    {
+                        img: '../../images/0-4.jpg'
                     }
                 ]
             }

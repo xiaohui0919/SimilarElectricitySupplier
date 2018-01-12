@@ -22,7 +22,9 @@
                 <span class="mui-tab-label">会员</span>
             </router-link>
             <router-link class="mui-tab-item" to="/shopcar">
-                <span class="mui-icon mui-icon-contact"><span class="mui-badge">0</span></span>
+                <span class="mui-icon mui-icon-contact">
+                    <span id="badge" class="mui-badge">0</span>
+                </span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
             <router-link class="mui-tab-item" to="/search">
@@ -38,6 +40,15 @@
 </style>
 
 <script>
+    import {vueBus} from './tool/vueBus'
+    // 兄弟组件间的传值
+    vueBus.$on('sendNumber',function (number) {
+        var badge=document.getElementById('badge')
+        var tempNumber = badge.innerText - 0;
+        tempNumber += number
+        badge.innerText=tempNumber
+    })
+    
     export default {
         data(){
             return {

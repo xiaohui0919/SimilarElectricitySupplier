@@ -12,8 +12,15 @@
                 </div>
             </div>
             <div class="count">
-                购买数量：
-                <Number v-on:send="getNumber"></Number>
+                购买数量：<Number v-on:send="getNumber"></Number>
+
+                <transition
+                v-on:before-enter="beforeEnter"
+                v-on:enter="enter"
+                v-on:after-enter="afterEnter"
+                >
+                    <div v-show="isshow" class="ball"></div>
+                </transition>
             </div>
             <div class="button">
                 <mt-button type="primary" size="small" >立即购买</mt-button>
@@ -37,6 +44,19 @@
 </template>
 
 <style>
+    .count {
+        position: relative;
+    }
+    .ball{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: red;
+        bottom: 0;
+        right: 110px;
+        transition: all 1s cubic-bezier(1,-0.62,.94,.33);
+    }
     .btn{
         margin-top: 5px;
     }
@@ -64,6 +84,7 @@
     import common from '../../tool/Common'
     import Number from '../sub/Number.vue'
     import {setItem} from '../../tool/LocalStorageHelper'
+    import {vueBus} from '../../tool/vueBus'
     export default{
         data(){
             return {
@@ -90,7 +111,8 @@
                     kc:60,
                     date:new Date()
                 },
-                subNumber:1
+                subNumber:1,
+                isshow:false
             }
         },
         props: ['id'],
@@ -104,12 +126,28 @@
 //            this.getInfoData(id)
         },
         methods: {
+            // 元素进入界面之前调用的方法
+            beforeEnter: function (el) {
+                el.style.transform="translate3d(0,0,0)"
+            },
+            // 元素过渡之中调用的方法
+            enter: function (el, done) {
+                // 不停地获取宽度的位移量，使当前的方法不停地调用
+                var offsetWidth=el.offsetWidth
+                el.style.transform="translate3d(-38px,264px,0)"
+                done()
+            },
+            // 元素过渡完成调用的方法
+            afterEnter: function (el) {
+                this.isshow=!this.isshow
+            },
+
             // 加入购物车方法的触发
             goToCart(){
                 // 1.小球动画
-
-                // 2.更改值
-
+                this.isshow=!this.isshow
+                // 2.更改值 vueBus
+                vueBus.$emit('sendNumber',this.subNumber)
                 // 3.存入数据库 要存的数据有：id、number
                 var id = this.$route.params.id
                 var data={
